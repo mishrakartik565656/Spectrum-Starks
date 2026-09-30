@@ -1,4 +1,4 @@
-import { CronJob } from 'bun';
+import { CronJob } from 'cron';
 import { db } from './db';
 import { bins } from './db/schema';
 import { broadcast } from './ws';

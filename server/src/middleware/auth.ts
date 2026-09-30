@@ -9,7 +9,11 @@ export const authMiddleware = (allowedRoles?: string[]) => createMiddleware(asyn
   }
 
   try {
-    const payload = await verify(token, process.env.JWT_SECRET!);
+    const payload = await verify(
+      token,
+      process.env.JWT_SECRET!,
+      'HS256'
+);
     c.set('user', payload);
     
     if (allowedRoles && !allowedRoles.includes(payload.role as string)) {
@@ -18,6 +22,9 @@ export const authMiddleware = (allowedRoles?: string[]) => createMiddleware(asyn
     
     await next();
   } catch (e) {
-    return c.json({ error: 'Invalid token' }, 401);
-  }
+  console.error('JWT verification failed:', e);
+  console.log('JWT_SECRET loaded:', !!process.env.JWT_SECRET);
+  console.log('JWT_SECRET length:', process.env.JWT_SECRET?.length);
+  return c.json({ error: 'Invalid token' }, 401);
+}
 });

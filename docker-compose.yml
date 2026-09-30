@@ -14,7 +14,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   minio:
-    image: minio/minio
+    image: quay.io/minio/minio
     container_name: cleancity_minio
     command: server /data --console-address ":9001"
     environment:

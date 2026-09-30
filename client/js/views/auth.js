@@ -55,7 +55,7 @@ export function loadLoginView(container) {
       } else if (user.role === 'worker') {
         window.location.hash = '#/worker/tasks';
       } else {
-        window.location.hash = '#/citizen/report';
+        window.location.hash = '#/dashboard';
       }
     } catch (err) {
       alert('Login failed: ' + err.message);
